@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Audio Recorder</title>
+
+	<script src="js/audiodisplay.js"></script>
+	<script src="js/recorderjs/recorder.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript" src="js/swfobject.js"></script>
+	<!-- <script type="text/javascript" src "js/swfSettings.js"></script> -->
+
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+	<div class="container">
+		<div id="viz">
+			<canvas id="analyser" width="1024" height="500"></canvas>
+			<!-- <canvas id="wavedisplay" width="1024" height="500"></canvas> -->
+		</div>
+		<div id="controls">
+			<img id="record" src="img/mic128.png" onclick="toggleRecording(this);">
+			<a id="save" href="#"><img src="img/save.svg"></a>
+		</div>
+	</div>
+	<div class="apple">
+		<div id="ios">asdf</div>
+		<div id="safari">asdfds</div>
+	</div>
+	<div id="flashContent">
+		<a href="http://www.adobe.com/go/getflash">
+			<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />
+		</a>
+		<p>This page requires Flash Player version 11.4.0 or higher.</p>
+	</div>
+</body>
+</html>
