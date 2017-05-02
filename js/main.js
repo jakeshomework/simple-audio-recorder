@@ -13,11 +13,79 @@
    limitations under the License.
 */
 
-// Check for iOS or Safari devices
-// import { flashRecorder } from './swfSettings.js';
+document.addEventListener("DOMContentLoaded", function() {
+  appleCheck();
+  flashRecorder();
+});
+
+// ---------- Class Control ----------
+
+
+
+// ---------- End Class Control ----------
+
+
+// ---------- Begin Browser Support ----------
+
+
+
+
+function appleCheck() {
+  var chromeContainer = document.getElementById('chrome');
+  var safariContainer = document.getElementById('safariContainer');
+  var iosContainer = document.getElementById('ios');
+
+
+  function hasClass(el, className) {
+    if (el.classList)
+      return el.classList.contains(className)
+    else
+      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
+  }
+
+  function addClass(el, className) {
+    if (el.classList)
+      el.classList.add(className)
+    else if (!hasClass(el, className)) el.className += " " + className
+  }
+
+  function removeClass(el, className) {
+    if (el.classList)
+      el.classList.remove(className)
+    else if (hasClass(el, className)) {
+      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
+      el.className=el.className.replace(reg, ' ')
+    }
+  }
+
+  var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
+  if (isIos) {
+    //document.getElementById("ios").innerHTML = "This an iOS device.";
+    addClass(chromeContainer, 'hidden');
+    addClass(safariContainer, 'hidden');
+  } else if (isSafari) {
+    //document.getElementById("safari").innerHTML = "Looks like you're using Safari browser.";
+    addClass(chromeContainer, 'hidden');
+    addClass(iosContainer, 'hidden');
+  } else {
+    //document.getElementById("root").innerHTML = ''
+    addClass(safariContainer, 'hidden');
+    addClass(iosContainer, 'hidden');
+  }
+  console.log("HEyDUDUE" + isIos + isSafari);
+}
+
+
+
+//---------- End Browser Support ----------
+
+
+// ---------- Flash Business (Safari) ----------
 function flashRecorder() {
 
-  console.log("halwekalkej");
+  console.log("I'm the flashRecorder -- look at me!");
   var swfVersionStr = "11.4.0";
   // <!-- xiSwfUrlStr can be used to define an express installer SWF. -->
   var xiSwfUrlStr = "";
@@ -47,25 +115,7 @@ function flashRecorder() {
   );
 }
 
-
-function appleCheck() {
-  var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
-  if (isIos) {
-    document.getElementById("ios").innerHTML = "This an iOS device.";
-  } else if (isSafari) {
-    document.getElementById("safari").innerHTML = "Looks like you're using Safari browser.";
-  }
-  console.log("HEyDUDUE" + isIos + isSafari);
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-  appleCheck();
-  flashRecorder();
-});
-
-//
+//---------- End Flash Business ----------
 
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
