@@ -34,13 +34,25 @@ chrome += "	<\/div>";
 
 var ios="";
 ios += "<div id=\"ios\">";
-ios += "	<img src=\"img\/voice-recorder-icon.jpg\" \/>";
-ios += "	<div>";
-ios += "		<a href=\"https:\/\/itunes.apple.com\/us\/app\/voice-recorder-free\/id685310398\">";
-ios += "			<li>Download Voice Recorder<\/li>";
-ios += "		<\/a>";
-ios += "	<\/div>";
+ios += "  <h5>iPhone and iPad option<\/h5>";
+ios += "  <div class=flex-col>";
+ios += "    <div>";
+ios += "      <div class=\"flex\">";
+ios += "        <img class=\"flex-item\" src=\"img\/voice-memos.png\" \/>";
+ios += "        <div class=\"app-desc flex-item\">";
+ios += "					<h4>Voice Memos<\/h4>";
+ios += "          <a href=\"https:\/\/appsto.re\/us\/gx3V_.i\"><h5>Apple<\/h5><\/a>";
+ios += "          <a href=\"https:\/\/appsto.re\/us\/gx3V_.i\">";
+ios += "            <li>View in iTunes<\/li>";
+ios += "          <\/a>";
+ios += "					<p>Apple Inc. All rights reserved<\/p>";
+ios += "        <\/div>";
+ios += "      <\/div>";
+ios += "    <\/div>";
+ios += "  <\/div>";
 ios += "<\/div>";
+
+
 
 var safari="";
 safari += "<div id=\"safariContainer\">";
@@ -72,7 +84,6 @@ function appleCheck() {
     theContent = chrome;
   }
   document.getElementById("root").innerHTML = theContent;
-  console.log("HEyDUDUE" + isIos + isSafari);
 }
 
 
@@ -82,8 +93,6 @@ function appleCheck() {
 
 // ---------- Flash Business (Safari) ----------
 function flashRecorder() {
-
-  console.log("I'm the flashRecorder -- look at me!");
   var swfVersionStr = "11.4.0";
   // <!-- xiSwfUrlStr can be used to define an express installer SWF. -->
   var xiSwfUrlStr = "";
@@ -222,8 +231,8 @@ function updateAnalysers(time) {
         var multiplier = analyserNode.frequencyBinCount / numBars;
 
         // Draw rectangle for each frequency bin.
-        for (var i = 0; i < numBars; ++i) {
-            var magnitude = 0;
+        for (var i = 10; i < numBars-10; ++i) {
+            var magnitude = 10;
             var offset = Math.floor( i * multiplier );
             // gotta sum/average the block, or we miss narrow-bandwidth spikes
             for (var j = 0; j< multiplier; j++)

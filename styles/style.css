@@ -1,12 +1,9 @@
 html { overflow: hidden; }
 body {
   font: 14pt Arial, sans-serif;
-  background: #555;
+  //background: #555;
   width: 100%;
   margin: 0 0;
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
 }
 
 .container {
@@ -22,7 +19,59 @@ body {
   //background: #4f5b66;
 }
 
+#ios {
+  width: 100%;
+  max-width: 400px;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+#ios p {
+  font-size: .7em;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.flex-item {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#ios h5 {
+  margin: 0px;
+  padding: 10px;
+  color: #777777;
+}
+
+#ios h4 {
+  margin: 0px;
+  //margin-top: 20px;
+  color: #595959;
+}
+
+#ios {
+  color: #777777;
+}
+
+//color: #474747;
+//color: #595959;
+//color: #777777;
 
 .apple {
   max-width: 1024px;
@@ -107,9 +156,7 @@ canvas {
   }
 
 }
-#ios {
-  display: flex;
-}
+
 
 .hidden {
   display: none !important;
