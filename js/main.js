@@ -13,67 +13,65 @@
    limitations under the License.
 */
 
+// ---------- Begin Browser Support ----------
+// ----- USED http://www.accessify.com/tools-and-wizards/developer-tools/html-javascript-convertor/
+// ----- ...to generage the js variable below
+
+var chrome="";
+chrome += "<div id=\"chrome\">";
+chrome += "		<div id=\"viz\">";
+chrome += "			<canvas id=\"analyser\" width=\"1024\" height=\"500\"><\/canvas>";
+chrome += "			<!-- <canvas id=\"wavedisplay\" width=\"1024\" height=\"500\"><\/canvas> -->";
+chrome += "		<\/div>";
+chrome += "";
+chrome += "		<div id=\"controls\">";
+chrome += "			<div>Audio Recorder<\/div>";
+chrome += "			<img id=\"record\" src=\"img\/mic128.png\" onclick=\"toggleRecording(this);\">";
+chrome += "			<a id=\"save\" href=\"#\"><img src=\"img\/save.svg\"><\/a>";
+chrome += "			<div>Click to begin recording<\/div>";
+chrome += "		<\/div>";
+chrome += "	<\/div>";
+
+var ios="";
+ios += "<div id=\"ios\">";
+ios += "	<img src=\"img\/voice-recorder-icon.jpg\" \/>";
+ios += "	<div>";
+ios += "		<a href=\"https:\/\/itunes.apple.com\/us\/app\/voice-recorder-free\/id685310398\">";
+ios += "			<li>Download Voice Recorder<\/li>";
+ios += "		<\/a>";
+ios += "	<\/div>";
+ios += "<\/div>";
+
+var safari="";
+safari += "<div id=\"safariContainer\">";
+safari += "	<div id=\"flashContent\">";
+safari += "		<a href=\"http:\/\/www.adobe.com\/go\/getflash\">";
+safari += "			<img src=\"http:\/\/www.adobe.com\/images\/shared\/download_buttons\/get_flash_player.gif\" alt=\"Get Adobe Flash player\" \/>";
+safari += "		<\/a>";
+safari += "		<p>This page requires Flash Player version 11.4.0 or higher.<\/p>";
+safari += "	<\/div>";
+safari += "<\/div>";
+
 document.addEventListener("DOMContentLoaded", function() {
   appleCheck();
-  flashRecorder();
 });
 
-// ---------- Class Control ----------
-
-
-
-// ---------- End Class Control ----------
-
-
-// ---------- Begin Browser Support ----------
-
-
-
-
 function appleCheck() {
-  var chromeContainer = document.getElementById('chrome');
-  var safariContainer = document.getElementById('safariContainer');
-  var iosContainer = document.getElementById('ios');
+  var root = document.getElementById('root');
 
-
-  function hasClass(el, className) {
-    if (el.classList)
-      return el.classList.contains(className)
-    else
-      return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'))
-  }
-
-  function addClass(el, className) {
-    if (el.classList)
-      el.classList.add(className)
-    else if (!hasClass(el, className)) el.className += " " + className
-  }
-
-  function removeClass(el, className) {
-    if (el.classList)
-      el.classList.remove(className)
-    else if (hasClass(el, className)) {
-      var reg = new RegExp('(\\s|^)' + className + '(\\s|$)')
-      el.className=el.className.replace(reg, ' ')
-    }
-  }
 
   var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
+  var theContent = '';
   if (isIos) {
-    //document.getElementById("ios").innerHTML = "This an iOS device.";
-    addClass(chromeContainer, 'hidden');
-    addClass(safariContainer, 'hidden');
+    theContent = ios;
   } else if (isSafari) {
-    //document.getElementById("safari").innerHTML = "Looks like you're using Safari browser.";
-    addClass(chromeContainer, 'hidden');
-    addClass(iosContainer, 'hidden');
+    flashRecorder();
+    theContent = safari;
   } else {
-    //document.getElementById("root").innerHTML = ''
-    addClass(safariContainer, 'hidden');
-    addClass(iosContainer, 'hidden');
+    theContent = chrome;
   }
+  document.getElementById("root").innerHTML = theContent;
   console.log("HEyDUDUE" + isIos + isSafari);
 }
 
@@ -129,12 +127,6 @@ var rafID = null;
 var analyserContext = null;
 var canvasWidth, canvasHeight;
 var recIndex = 0;
-
-/* TODO:
-
-- offer mono option
-- "Monitor input" switch
-*/
 
 function saveAudio() {
     // audioRecorder.exportWAV( doneEncoding );
