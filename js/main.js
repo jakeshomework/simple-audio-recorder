@@ -19,18 +19,19 @@
 
 var chrome="";
 chrome += "<div id=\"chrome\">";
-chrome += "		<div id=\"viz\">";
-chrome += "			<canvas id=\"analyser\" width=\"1024\" height=\"500\"><\/canvas>";
-chrome += "			<!-- <canvas id=\"wavedisplay\" width=\"1024\" height=\"500\"><\/canvas> -->";
-chrome += "		<\/div>";
+chrome += "  <div id=\"viz\">";
+chrome += "    <canvas id=\"analyser\" width=\"1024\" height=\"500\"><\/canvas>";
+chrome += "    <!-- <canvas id=\"wavedisplay\" width=\"1024\" height=\"500\"><\/canvas> -->";
+chrome += "  <\/div>";
 chrome += "";
-chrome += "		<div id=\"controls\">";
-chrome += "			<div>Audio Recorder<\/div>";
-chrome += "			<img id=\"record\" src=\"img\/mic128.png\" onclick=\"toggleRecording(this);\">";
-chrome += "			<a id=\"save\" href=\"#\"><img src=\"img\/save.svg\"><\/a>";
-chrome += "			<div>Click to begin recording<\/div>";
-chrome += "		<\/div>";
-chrome += "	<\/div>";
+chrome += "  <div id=\"controls\">";
+chrome += "    <div>Audio Recorder<\/div>";
+chrome += "    <img id=\"record\" src=\"img\/mic-4.png\" onclick=\"toggleRecording(this);\">";
+chrome += "    <a id=\"save\" href=\"#\"><img src=\"img\/save.svg\"><\/a>";
+chrome += "    <div id=\"timer\">Click to begin recording<\/div>";
+chrome += "  <\/div>";
+chrome += "<\/div>";
+
 
 var ios="";
 ios += "<div id=\"ios\">";
@@ -41,17 +42,15 @@ ios += "      <div class=\"flex\">";
 ios += "        <img class=\"flex-item\" src=\"img\/voice-memos.png\" \/>";
 ios += "        <div class=\"app-desc flex-item\">";
 ios += "					<h4>Voice Memos<\/h4>";
-ios += "          <a href=\"https:\/\/appsto.re\/us\/gx3V_.i\"><h5>Apple<\/h5><\/a>";
 ios += "          <a href=\"https:\/\/appsto.re\/us\/gx3V_.i\">";
-ios += "            <li>View in iTunes<\/li>";
+ios += "            <li>OPEN<\/li>";
 ios += "          <\/a>";
-ios += "					<p>Apple Inc. All rights reserved<\/p>";
+ios += "					<p>&copy; Apple Inc.\</p>";
 ios += "        <\/div>";
 ios += "      <\/div>";
 ios += "    <\/div>";
 ios += "  <\/div>";
 ios += "<\/div>";
-
 
 
 var safari="";
@@ -163,6 +162,7 @@ function autoDownload( fileName ) {
 function simulateClick(elId) {
   var evt;
   var el = document.getElementById(elId);
+
   if (document.createEvent) {
       evt = document.createEvent("MouseEvents");
       evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
@@ -178,11 +178,15 @@ function doneEncoding( blob ) {
 }
 
 function toggleRecording( e ) {
+    var timer = document.getElementById("timer");
     if (e.classList.contains("recording")) {
         // stop recording
         audioRecorder.stop();
         e.classList.remove("recording");
         audioRecorder.getBuffers( gotBuffers );
+        stopTimer();
+        zeroTimer();
+        //timer.innerHTML = "Click to begin recording"
     } else {
         // start recording
         if (!audioRecorder)
@@ -190,6 +194,8 @@ function toggleRecording( e ) {
         e.classList.add("recording");
         audioRecorder.clear();
         audioRecorder.record();
+        startTimer();
+        //timer.innerHTML = "YO";
     }
 }
 

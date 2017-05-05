@@ -6,11 +6,6 @@ body {
   margin: 0 0;
 }
 
-.container {
-  /*display: flex;
-  flex-direction: column;*/
-}
-
 #chrome {
   width: 100%;
   max-width: 400px;
@@ -19,66 +14,11 @@ body {
   //background: #4f5b66;
 }
 
-#ios {
-  width: 100%;
-  max-width: 400px;
-  height: 290px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#ios p {
-  font-size: .7em;
-}
-
-.flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.flex-item {
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#ios h5 {
-  margin: 0px;
-  padding: 10px;
-  color: #777777;
-}
-
-#ios h4 {
-  margin: 0px;
-  //margin-top: 20px;
-  color: #595959;
-}
-
-#ios {
-  color: #777777;
-}
-
-//color: #474747;
-//color: #595959;
-//color: #777777;
-
 .apple {
   max-width: 1024px;
 }
 .apple div {
   margin: 10px 30px;
-
 }
 
 canvas {
@@ -94,8 +34,6 @@ canvas {
   pointer-events:none
 }
 #controls {
-  //height: 150px;
-  //width: 150px;
   height: 290px;
   z-index: 10;
   width: 100%
@@ -113,6 +51,11 @@ canvas {
   padding: 10px;
   //background-color: #343d46;
   z-index: 20;
+}
+
+#controls img {
+  width: 150px;
+  height: 150px;
 }
 
 #record {
@@ -138,26 +81,3 @@ canvas {
 }
 #save { opacity: 0.25;}
 #save[download] { opacity: 1;}
-#viz {
-  //padding: 10px;
-
-  //display: flex;
-  //flex-direction: column;
-  //align-items: center;
-}
-@media (orientation: landscape) {
-  #controls {
-     //align-self: flex-end;
-  }
-  .container {
-    /*flex-direction: row;
-    justify-content: center;*/
-
-  }
-
-}
-
-
-.hidden {
-  display: none !important;
-}
