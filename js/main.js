@@ -17,22 +17,23 @@
 // ----- USED http://www.accessify.com/tools-and-wizards/developer-tools/html-javascript-convertor/
 // ----- ...to generage the js variable below
 
-var chrome = "";
-chrome += '<div id="chrome">';
-chrome += '  <div id="viz">';
-chrome += '    <canvas id="analyser" width="1024" height="500"></canvas>';
-chrome +=
+var webRTCVersion = "";
+webRTCVersion += '<div id="chrome">';
+webRTCVersion += '  <div id="viz">';
+webRTCVersion +=
+  '    <canvas id="analyser" width="1024" height="500"></canvas>';
+webRTCVersion +=
   '    <!-- <canvas id="wavedisplay" width="1024" height="500"></canvas> -->';
-chrome += "  </div>";
-chrome += "";
-chrome += '  <div id="controls">';
-chrome += "    <div>Audio Recorder</div>";
-chrome +=
+webRTCVersion += "  </div>";
+webRTCVersion += "";
+webRTCVersion += '  <div id="controls">';
+webRTCVersion += "    <div>Audio Recorder</div>";
+webRTCVersion +=
   '    <img id="record" src="img/mic-4.png" onclick="toggleRecording(this);">';
-chrome += '    <a id="save" href="#"><img src="img/save.svg"></a>';
-chrome += '    <div id="timer">Click to begin recording</div>';
-chrome += "  </div>";
-chrome += "</div>";
+webRTCVersion += '    <a id="save" href="#"><img src="img/save.svg"></a>';
+webRTCVersion += '    <div id="timer">Click to begin recording</div>';
+webRTCVersion += "  </div>";
+webRTCVersion += "</div>";
 
 var ios = "";
 ios += '<div id="ios">';
@@ -53,16 +54,17 @@ ios += "    </div>";
 ios += "  </div>";
 ios += "</div>";
 
-var safari = "";
-safari += '<div id="safariContainer">';
-safari += '	<div id="flashContent">';
-safari += '		<a href="http://www.adobe.com/go/getflash">';
-safari +=
+var flashVersion = "";
+flashVersion += '<div id="safariContainer">';
+flashVersion += '	<div id="flashContent">';
+flashVersion += '		<a href="http://www.adobe.com/go/getflash">';
+flashVersion +=
   '			<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />';
-safari += "		</a>";
-safari += "		<p>This page requires Flash Player version 11.4.0 or higher.</p>";
-safari += "	</div>";
-safari += "</div>";
+flashVersion += "		</a>";
+flashVersion +=
+  "		<p>This page requires Flash Player version 11.4.0 or higher.</p>";
+flashVersion += "	</div>";
+flashVersion += "</div>";
 
 document.addEventListener("DOMContentLoaded", function() {
   appleCheck();
@@ -70,22 +72,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function appleCheck() {
   var root = document.getElementById("root");
-
-  var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
   var theContent = "";
-  if (isIos) {
-    theContent = ios;
-  } else if (isSafari) {
-    // testing for WebRTC in Safari
-    theContent = chrome;
+  var isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  // var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-    // original code that renders flash on safari
-    // flashRecorder();
-    // theContent = safari;
+  /* **** BEGIN CHECK **** */
+
+  if (DetectRTC.isWebRTCSupported === true) {
+    theContent = webRTCVersion;
+  } else if (isIos) {
+    theContent = ios;
   } else {
-    theContent = chrome;
+    flashRecorder();
+    theContent = flashVersion;
   }
+
+  /* **** END CHECK **** */
+
+  // /* **** BEGIN OLD CHECK **** */
+
+  // if (isIos) {
+  //   theContent = ios;
+  // } else if (isSafari) {
+  //   // testing for WebRTC in Safari
+  //   // theContent = chrome;
+
+  //   // original code that renders flash on safari
+  //   flashRecorder();
+  //   theContent = safari;
+  // } else {
+  //   theContent = chrome;
+  // }
+  // /* **** END OLD CHECK **** */
+
   document.getElementById("root").innerHTML = theContent;
 }
 
